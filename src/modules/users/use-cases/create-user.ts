@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { AppError } from 'errors/errors';
 import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../errors/errors';
 import { ICreateUserDTO } from '../dtos/ICreateUserDTO';
 import { IUsersRepository } from '../repositories/IUsersRepositories';
 
