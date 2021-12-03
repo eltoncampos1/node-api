@@ -1,8 +1,16 @@
+import 'reflect-metadata';
 import 'dotenv/config';
-import express from 'express';
 import './database';
+import 'shared/container';
+import express from 'express';
+
+import { router } from './routes';
+
+const { PORT } = process.env;
 
 const app = express();
-const { PORT } = process.env;
+app.use(express.json());
+
+app.use(router);
 
 app.listen(PORT, () => console.log(`app is running on::${PORT}`));
