@@ -1,3 +1,4 @@
+import { AppError } from 'errors/errors';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateUserUseCase } from './create-user';
