@@ -4,30 +4,21 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
+    "baseUrl": "src",
     "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "sourceMap": true,
-    "strictPropertyInitialization": false, 
+    "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "controllers/*": ["./src/controllers/*"],
-      "models/*": ["src/entities/*"],
-      "config/*": ["./src/config/*"],
-      "utils/*": ["./src/utils/*"],
-      "DTOs/*":["./src/DTOs/*"],
-      "repositories/*": ["./src/utils/*"],
-      "implementations/*": ["./src/implementations/*"],
-      "use-cases/*": ["./src/use-cases/*"],
-      "routes/*":["./src/routes/*"],
-      "errors/*": ["./src/errors/*"],
-      "shared/*": ["./src/shared/*"]
-    }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
 }

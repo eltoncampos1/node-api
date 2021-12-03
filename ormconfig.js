@@ -6,7 +6,7 @@ module.exports = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DATABASE,
   migrations: ['./src/database/migrations/*.ts'],
-  entities: ['./src/entities/*.ts'],
+  entities: ['./src/modules/**/entities/*.ts'],
   cli: {
     migrationsDir: './src/database/migrations',
   },
