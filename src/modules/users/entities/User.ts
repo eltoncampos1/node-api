@@ -1,12 +1,15 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
-type Etnia = 'branco' | 'pardo' | 'preto' | 'amarelo' | 'indigena';
+export type Etnia = 'branco' | 'pardo' | 'preto' | 'amarelo' | 'indigena';
 
 @Entity('users')
 class User {
   @PrimaryColumn()
   id: string;
+
+  @Column()
+  name: string;
 
   @Column()
   phone: string;
@@ -24,7 +27,13 @@ class User {
     type: 'enum',
     enum: ['branco', 'pardo', 'preto', 'amarelo', 'indigena'],
   })
-  etnia: Etnia;
+  ethnicity: Etnia;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at?: Date;
 
   constructor() {
     if (!this.id) {
