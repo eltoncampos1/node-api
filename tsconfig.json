@@ -4,21 +4,35 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "strict": true,
     "sourceMap": true,
     "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "modules/*": [
+        "modules/*"
+      ],
+      "use-cases/*": [
+        "use-cases/*"
+      ],
+      "repositories": [
+        "repositories/*"
+      ],
+      "shared/*": [
+        "shared/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }
