@@ -1,4 +1,4 @@
-import { PostgresUsersRepository } from 'modules/users/implementations/PostegresUsersRepository';
+import { PostgresUsersRepository } from 'modules/users/repositories/implementations/PostegresUsersRepository';
 import { IUsersRepository } from 'modules/users/repositories/IUsersRepositories';
 import { container } from 'tsyringe';
 
