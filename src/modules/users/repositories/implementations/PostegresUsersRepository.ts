@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { getRepository, Repository } from 'typeorm';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { User } from '../../entities/User';
@@ -36,6 +35,16 @@ class PostgresUsersRepository implements IUsersRepository {
     const user = await this.repository.findOne({ email });
 
     return user;
+  }
+
+  async findByID(user_id: string): Promise<User | undefined> {
+    const user = await this.repository.findOne({ id: user_id });
+
+    return user;
+  }
+
+  async save(user: User): Promise<void> {
+    await this.repository.save(user);
   }
 }
 
