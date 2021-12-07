@@ -15,6 +15,7 @@ describe('Create User', () => {
     const user: ICreateUserDTO = {
       name: 'user',
       phone: 'user_phone',
+      password: '1234',
       email: 'user@email.com',
       age: 20,
       weight: 60,
@@ -30,6 +31,7 @@ describe('Create User', () => {
     const user1: ICreateUserDTO = {
       name: 'user',
       phone: 'user_phone',
+      password: '1234',
       email: 'user@email.com',
       age: 20,
       weight: 60,
@@ -39,6 +41,7 @@ describe('Create User', () => {
     const user2: ICreateUserDTO = {
       name: 'user2',
       phone: 'user2_phone',
+      password: '1234',
       email: 'user@email.com',
       age: 20,
       weight: 60,

@@ -6,10 +6,6 @@ import { IUsersRepository } from '../IUsersRepositories';
 class UsersRepositoryInMemory implements IUsersRepository {
   users: User[] = [];
 
-  generateToken(user: User): Promise<string> {
-    throw new Error('Method not implemented.');
-  }
-
   async create({ name, email, password, phone, age, ethnicity, weight }: ICreateUserDTO): Promise<void> {
     const user = new User();
 
@@ -32,12 +28,23 @@ class UsersRepositoryInMemory implements IUsersRepository {
     return user;
   }
 
-  passwordHash(password: string): Promise<string> {
-    throw new Error('Method not implemented.');
+  async passwordHash(password: string): Promise<string> {
+    const passwordHash = `${password}123`;
+
+    return passwordHash;
   }
 
-  comparePassword(password: string, user_password: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+  async comparePassword(password: string, user_password: string): Promise<boolean> {
+    if (password === user_password) {
+      return true;
+    }
+    return false;
+  }
+
+  async generateToken(user: User): Promise<string> {
+    const token = 'token';
+
+    return token;
   }
 }
 
