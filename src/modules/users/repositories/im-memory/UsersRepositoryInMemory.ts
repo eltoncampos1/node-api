@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { ICreateUserDTO } from 'modules/users/dtos/ICreateUserDTO';
 import { User } from 'modules/users/entities/User';
 import { IUsersRepository } from '../IUsersRepositories';
@@ -32,6 +31,18 @@ class UsersRepositoryInMemory implements IUsersRepository {
     const all = await this.users;
 
     return all;
+  }
+
+  async findByID(user_id: string): Promise<User | undefined> {
+    const user = this.users.find(us => us.id === user_id);
+
+    return user;
+  }
+
+  async save(user: User): Promise<void> {
+    const findIndex = this.users.findIndex(findUser => findUser.id === user.id);
+
+    this.users[findIndex] = user;
   }
 }
 
