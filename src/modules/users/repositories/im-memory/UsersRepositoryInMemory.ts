@@ -27,25 +27,6 @@ class UsersRepositoryInMemory implements IUsersRepository {
 
     return user;
   }
-
-  async passwordHash(password: string): Promise<string> {
-    const passwordHash = `${password}123`;
-
-    return passwordHash;
-  }
-
-  async comparePassword(password: string, user_password: string): Promise<boolean> {
-    if (password === user_password) {
-      return true;
-    }
-    return false;
-  }
-
-  async generateToken(user: User): Promise<string> {
-    const token = 'token';
-
-    return token;
-  }
 }
 
 export { UsersRepositoryInMemory };

@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { hash } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../errors/errors';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
@@ -19,13 +20,12 @@ class CreateUserUseCase {
       throw new AppError("This user already exists")
     }
 
-    const passwordHashed = await this.usersRepository.passwordHash(password)
-
+    const hashedPassword = await hash(password, 8);
     await this.usersRepository.create({
       name,
       email,
       age,
-      password: passwordHashed,
+      password: hashedPassword,
       phone,
       weight,
       ethnicity,
