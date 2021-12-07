@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { hash } from 'bcrypt';
+import { IHashProvider } from 'modules/users/providers/HashProvider/models/IHasProvider';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../errors/errors';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
@@ -9,7 +9,10 @@ import { IUsersRepository } from '../../repositories/IUsersRepositories';
 class CreateUserUseCase {
   constructor(
     @inject('PostgresUsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
   ) { }
 
   async execute({ name, email, password, ethnicity, age, phone, weight }: ICreateUserDTO): Promise<void> {
@@ -20,7 +23,8 @@ class CreateUserUseCase {
       throw new AppError("This user already exists")
     }
 
-    const hashedPassword = await hash(password, 8);
+    const hashedPassword = await this.hashProvider.generateHash(password)
+
     await this.usersRepository.create({
       name,
       email,

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { compare } from 'bcrypt';
 import { AppError } from 'errors/errors';
 import { sign } from 'jsonwebtoken';
+import { IHashProvider } from 'modules/users/providers/HashProvider/models/IHasProvider';
 import { IUsersRepository } from 'modules/users/repositories/IUsersRepositories';
 import { inject, injectable } from 'tsyringe';
 
@@ -31,6 +31,9 @@ class AuthenticateUserUseCase {
   constructor(
     @inject('PostgresUsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
   ) { }
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
@@ -40,7 +43,7 @@ class AuthenticateUserUseCase {
       throw new AppError("Email or password incorrect!")
     }
 
-    const passwordMatch = await compare(password, user.password);
+    const passwordMatch = await this.hashProvider.compareHash(password, user.password)
 
     if (!passwordMatch) {
       throw new AppError("Email or password incorrect!")

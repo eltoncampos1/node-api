@@ -1,3 +1,4 @@
+import FakeHashProvider from 'modules/users/providers/HashProvider/fake/fakeHashProvider';
 import { AppError } from '../../../../errors/errors';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { UsersRepositoryInMemory } from '../../repositories/im-memory/UsersRepositoryInMemory';
@@ -5,10 +6,12 @@ import { CreateUserUseCase } from './create-user';
 
 let usersRepository: UsersRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
+let hashProvider: FakeHashProvider;
 describe('Create User', () => {
   beforeEach(() => {
+    hashProvider = new FakeHashProvider();
     usersRepository = new UsersRepositoryInMemory();
-    createUserUseCase = new CreateUserUseCase(usersRepository);
+    createUserUseCase = new CreateUserUseCase(usersRepository, hashProvider);
   });
 
   it('should be able to create a new user', async () => {

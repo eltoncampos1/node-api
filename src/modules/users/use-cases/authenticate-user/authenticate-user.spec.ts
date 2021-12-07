@@ -1,4 +1,5 @@
 import { ICreateUserDTO } from 'modules/users/dtos/ICreateUserDTO';
+import FakeHashProvider from 'modules/users/providers/HashProvider/fake/fakeHashProvider';
 import { UsersRepositoryInMemory } from 'modules/users/repositories/im-memory/UsersRepositoryInMemory';
 import { AppError } from '../../../../errors/errors';
 import { CreateUserUseCase } from '../create-user/create-user';
@@ -7,11 +8,13 @@ import { AuthenticateUserUseCase } from './autenticate-user';
 let authenticateUserUseCase: AuthenticateUserUseCase;
 let usersRepository: UsersRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
+let hashProvider: FakeHashProvider;
 describe('Authentica user', () => {
   beforeEach(() => {
+    hashProvider = new FakeHashProvider();
     usersRepository = new UsersRepositoryInMemory();
-    authenticateUserUseCase = new AuthenticateUserUseCase(usersRepository);
-    createUserUseCase = new CreateUserUseCase(usersRepository);
+    authenticateUserUseCase = new AuthenticateUserUseCase(usersRepository, hashProvider);
+    createUserUseCase = new CreateUserUseCase(usersRepository, hashProvider);
   });
   it('Should be able to authenticate an user session', async () => {
     const user: ICreateUserDTO = {
