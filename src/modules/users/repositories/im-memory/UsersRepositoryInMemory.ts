@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { ICreateUserDTO } from 'modules/users/dtos/ICreateUserDTO';
 import { User } from 'modules/users/entities/User';
 import { IUsersRepository } from '../IUsersRepositories';
@@ -5,12 +6,17 @@ import { IUsersRepository } from '../IUsersRepositories';
 class UsersRepositoryInMemory implements IUsersRepository {
   users: User[] = [];
 
-  async create({ name, email, phone, age, ethnicity, weight }: ICreateUserDTO): Promise<void> {
+  generateToken(user: User): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+
+  async create({ name, email, password, phone, age, ethnicity, weight }: ICreateUserDTO): Promise<void> {
     const user = new User();
 
     Object.assign(user, {
       name,
       email,
+      password,
       phone,
       age,
       ethnicity,
@@ -24,6 +30,14 @@ class UsersRepositoryInMemory implements IUsersRepository {
     const user = this.users.find(usr => usr.email === email);
 
     return user;
+  }
+
+  passwordHash(password: string): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+
+  comparePassword(password: string, user_password: string): Promise<boolean> {
+    throw new Error('Method not implemented.');
   }
 }
 
