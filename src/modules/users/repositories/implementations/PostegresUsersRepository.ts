@@ -11,6 +11,12 @@ class PostgresUsersRepository implements IUsersRepository {
     this.repository = getRepository(User);
   }
 
+  async list(): Promise<User[]> {
+    const users = this.repository.find();
+
+    return users;
+  }
+
   async create({ id, name, password, phone, email, weight, age, ethnicity }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       id,
