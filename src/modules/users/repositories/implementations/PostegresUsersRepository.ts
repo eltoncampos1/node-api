@@ -46,6 +46,10 @@ class PostgresUsersRepository implements IUsersRepository {
   async save(user: User): Promise<void> {
     await this.repository.save(user);
   }
+
+  async delete(user_id: string): Promise<void> {
+    await this.repository.delete(user_id);
+  }
 }
 
 export { PostgresUsersRepository };
