@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { AppError } from 'errors/errors';
 import { sign } from 'jsonwebtoken';
-import { IHashProvider } from 'modules/users/providers/HashProvider/models/IHasProvider';
+import { IHashProvider } from 'modules/users/providers/HashProvider/models/IHashProvider';
 import { IUsersRepository } from 'modules/users/repositories/IUsersRepositories';
 import { inject, injectable } from 'tsyringe';
 

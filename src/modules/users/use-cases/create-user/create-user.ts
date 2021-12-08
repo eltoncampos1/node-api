@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IHashProvider } from 'modules/users/providers/HashProvider/models/IHasProvider';
+import { IHashProvider } from 'modules/users/providers/HashProvider/models/IHashProvider';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../errors/errors';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';

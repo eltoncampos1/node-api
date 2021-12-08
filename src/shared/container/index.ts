@@ -1,5 +1,5 @@
 import { BCryptHashProvider } from 'modules/users/providers/HashProvider/implementations/BCryptHashProvider';
-import { IHashProvider } from 'modules/users/providers/HashProvider/models/IHasProvider';
+import { IHashProvider } from 'modules/users/providers/HashProvider/models/IHashProvider';
 import { PostgresUsersRepository } from 'modules/users/repositories/implementations/PostegresUsersRepository';
 import { IUsersRepository } from 'modules/users/repositories/IUsersRepositories';
 import { container } from 'tsyringe';
