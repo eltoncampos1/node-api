@@ -192,4 +192,32 @@ describe('Create Address', () => {
       await createAddressUseCase.execute(address);
     }).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to create a addres with no state is provided', async () => {
+    const user: ICreateUserDTO = {
+      name: 'user',
+      phone: 'user_phone',
+      password: '1234',
+      email: 'user@email.com',
+      age: 20,
+      weight: 60,
+      ethnicity: 'branco',
+    };
+
+    await createUserUseCase.execute(user);
+
+    const address: ICreateAddressDTO = {
+      city: 'city',
+      number: 1,
+      street: 'street',
+      zip_code: 'zip_code',
+      complement: 'complement',
+      user: usersRepository.users[0],
+      userId: usersRepository.users[0].id as string,
+    } as ICreateAddressDTO;
+
+    expect(async () => {
+      await createAddressUseCase.execute(address);
+    }).rejects.toBeInstanceOf(AppError);
+  });
 });
