@@ -30,7 +30,7 @@ describe('Delete User', () => {
 
     await createUserUseCase.execute(user);
 
-    await deleteUserUseCase.execute(usersRepository.users[0].id);
+    await deleteUserUseCase.execute(usersRepository.users[0].id as string);
 
     expect(usersRepository.users.length).toBe(0);
   });

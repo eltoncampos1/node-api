@@ -32,7 +32,7 @@ describe('Update Password', () => {
     await createUserUseCase.execute(user);
 
     const updatedPasswordUser = {
-      user_id: usersRepository.users[0].id,
+      user_id: usersRepository.users[0].id as string,
       password: '123456',
       old_password: user.password,
     };
@@ -56,7 +56,7 @@ describe('Update Password', () => {
 
     await expect(async () => {
       const updatedPasswordUser = {
-        user_id: usersRepository.users[0].id,
+        user_id: usersRepository.users[0].id as string,
         password: '123456',
         old_password: 'wrong_password',
       };
