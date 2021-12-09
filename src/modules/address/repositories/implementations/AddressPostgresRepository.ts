@@ -15,6 +15,10 @@ class AddressPostgresRepository implements IAddressRepository {
 
     await this.addresRepository.save(address);
   }
+
+  async delete(address_id: string): Promise<void> {
+    await this.addresRepository.delete(address_id);
+  }
 }
 
 export { AddressPostgresRepository };
