@@ -8,10 +8,10 @@ class IAddresRepositoryInMemmory implements IAddressRepository {
 
   users: User[] = [];
 
-  async create(data: ICreateAddressDTO): Promise<void> {
+  async create({ user, userId, complement, street, city, zip_code, state, number }: ICreateAddressDTO): Promise<void> {
     const address = new Address();
 
-    Object.assign(address, data);
+    Object.assign(address, { user, userId, complement, street, city, zip_code, state, number });
 
     this.address.push(address);
   }

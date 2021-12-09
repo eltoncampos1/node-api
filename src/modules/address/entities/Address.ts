@@ -1,5 +1,5 @@
 import { User } from 'modules/users/entities/User';
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
 @Entity('address')
