@@ -1,3 +1,4 @@
+import { AppError } from 'errors/errors';
 import { ICreateAddressDTO } from 'modules/address/dtos/ICreateAddressDTO';
 import { IAddresRepositoryInMemmory } from 'modules/address/repositories/ImMemmory/IAddressRepositoryInMemmory';
 import { ICreateUserDTO } from 'modules/users/dtos/ICreateUserDTO';
@@ -11,7 +12,7 @@ let createUserUseCase: CreateUserUseCase;
 let hashProvider: FakeHashProvider;
 let addressRepository: IAddresRepositoryInMemmory;
 let createAddressUseCase: CreateAddressUseCase;
-describe('Create User', () => {
+describe('Create Address', () => {
   beforeEach(() => {
     hashProvider = new FakeHashProvider();
     usersRepository = new UsersRepositoryInMemory();
@@ -49,7 +50,24 @@ describe('Create User', () => {
     expect(addressRepository.address[0]).toHaveProperty('id');
   });
 
-  // it('should not be able to create a new user with an existing email', async () => {
+  it('should not be able to create a new Address if no user is provided', async () => {
+    const address: ICreateAddressDTO = {
+      city: 'city',
+      number: 1,
+      state: 'state',
+      street: 'street',
+      zip_code: 'zip_code',
+      complement: 'complement',
+      user: usersRepository.users[0],
+      userId: 'invalid_user_id',
+    };
+
+    expect(async () => {
+      await createAddressUseCase.execute(address);
+    }).rejects.toBeInstanceOf(AppError);
+  });
+
+  // it('should not be able to create a new Address if no user is provided', async () => {
   //   const user1: ICreateUserDTO = {
   //     name: 'user',
   //     phone: 'user_phone',
