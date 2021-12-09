@@ -11,7 +11,9 @@ class PostgresUsersRepository implements IUsersRepository {
   }
 
   async list(): Promise<User[]> {
-    const users = this.repository.find();
+    const users = this.repository.find({
+      relations: ['address'],
+    });
 
     return users;
   }
