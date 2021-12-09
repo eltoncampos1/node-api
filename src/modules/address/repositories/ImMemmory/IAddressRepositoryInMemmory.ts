@@ -15,6 +15,16 @@ class IAddresRepositoryInMemmory implements IAddressRepository {
 
     this.address.push(address);
   }
+
+  async save(address: Address): Promise<void> {
+    await this.address.push(address);
+  }
+
+  async findByID(address_id: string): Promise<Address> {
+    const address = this.address.find(adress => adress.id === address_id);
+
+    return address as Address;
+  }
 }
 
 export { IAddresRepositoryInMemmory };

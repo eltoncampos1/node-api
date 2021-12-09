@@ -21,7 +21,6 @@ class DeleteAddressUseCase {
 
     user.address = null as unknown as Address
 
-
     await this.usersRepository.save(user)
   }
 }
