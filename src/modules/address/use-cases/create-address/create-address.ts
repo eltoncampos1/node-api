@@ -22,6 +22,10 @@ class CreateAddressUseCase {
       throw new AppError('User not found')
     }
 
+    if (userAlreadyExists.address) {
+      throw new AppError('Address already register, please update the address in update section')
+    }
+
     if (!street) {
       throw new AppError(`Missing information: street`)
     }

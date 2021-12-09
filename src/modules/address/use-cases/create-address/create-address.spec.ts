@@ -67,31 +67,73 @@ describe('Create Address', () => {
     }).rejects.toBeInstanceOf(AppError);
   });
 
-  // it('should not be able to create a new Address if no user is provided', async () => {
-  //   const user1: ICreateUserDTO = {
-  //     name: 'user',
-  //     phone: 'user_phone',
-  //     password: '1234',
-  //     email: 'user@email.com',
-  //     age: 20,
-  //     weight: 60,
-  //     ethnicity: 'branco',
-  //   };
+  it('should not be able to create a new Address if user already have an address', async () => {
+    const user: ICreateUserDTO = {
+      name: 'user',
+      phone: 'user_phone',
+      password: '1234',
+      email: 'user@email.com',
+      age: 20,
+      weight: 60,
+      ethnicity: 'branco',
+    };
 
-  //   const user2: ICreateUserDTO = {
-  //     name: 'user2',
-  //     phone: 'user2_phone',
-  //     password: '1234',
-  //     email: 'user@email.com',
-  //     age: 20,
-  //     weight: 60,
-  //     ethnicity: 'branco',
-  //   };
+    await createUserUseCase.execute(user);
 
-  //   await createUserUseCase.execute(user1);
+    const address: ICreateAddressDTO = {
+      city: 'city',
+      number: 1,
+      state: 'state',
+      street: 'street',
+      zip_code: 'zip_code',
+      complement: 'complement',
+      user: usersRepository.users[0],
+      userId: usersRepository.users[0].id as string,
+    };
 
-  //   expect(async () => {
-  //     await createUserUseCase.execute(user2);
-  //   }).rejects.toBeInstanceOf(AppError);
-  // });
+    await createAddressUseCase.execute(address);
+
+    const address2: ICreateAddressDTO = {
+      city: 'city',
+      number: 1,
+      state: 'state',
+      street: 'street',
+      zip_code: 'zip_code',
+      complement: 'complement',
+      user: usersRepository.users[0],
+      userId: 'invalid_user_id',
+    };
+
+    expect(async () => {
+      await createAddressUseCase.execute(address2);
+    }).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to create a addres with no street is provided', async () => {
+    const user: ICreateUserDTO = {
+      name: 'user',
+      phone: 'user_phone',
+      password: '1234',
+      email: 'user@email.com',
+      age: 20,
+      weight: 60,
+      ethnicity: 'branco',
+    };
+
+    await createUserUseCase.execute(user);
+
+    const address: ICreateAddressDTO = {
+      city: 'city',
+      number: 1,
+      state: 'state',
+      zip_code: 'zip_code',
+      complement: 'complement',
+      user: usersRepository.users[0],
+      userId: usersRepository.users[0].id as string,
+    } as ICreateAddressDTO;
+
+    expect(async () => {
+      await createAddressUseCase.execute(address);
+    }).rejects.toBeInstanceOf(AppError);
+  });
 });
