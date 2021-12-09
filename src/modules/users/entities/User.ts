@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import { Address } from 'modules/address/entities/Address';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
 export type Etnia = 'branco' | 'pardo' | 'preto' | 'amarelo' | 'indigena';
@@ -6,7 +7,7 @@ export type Etnia = 'branco' | 'pardo' | 'preto' | 'amarelo' | 'indigena';
 @Entity('users')
 class User {
   @PrimaryColumn()
-  id: string;
+  id?: string;
 
   @Column()
   password: string;
@@ -37,6 +38,10 @@ class User {
 
   @UpdateDateColumn()
   updated_at?: Date;
+
+  @OneToOne(() => Address, address => address.user, { eager: true })
+  @JoinColumn()
+  address?: Address;
 
   constructor() {
     if (!this.id) {
